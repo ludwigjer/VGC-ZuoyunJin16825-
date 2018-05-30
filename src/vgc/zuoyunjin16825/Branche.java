@@ -14,9 +14,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class Branche extends javax.swing.JFrame {
+public class Branche extends javax.swing.JFrame implements ProgramInterface{
 
     public Branche() {
         initComponents();

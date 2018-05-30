@@ -5,21 +5,24 @@
  */
 package vgc.zuoyunjin16825;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
+public class AddAndEditCourseAndTimetable extends javax.swing.JFrame implements ProgramInterface{
 
     /**
      * Creates new form AddAndEditCourse
@@ -123,6 +126,15 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
         WED = new javax.swing.JTextField();
         THUR = new javax.swing.JTextField();
         FRI = new javax.swing.JTextField();
+        CIDC = new javax.swing.JLabel();
+        CNAC = new javax.swing.JLabel();
+        FIDC = new javax.swing.JLabel();
+        BIDC = new javax.swing.JLabel();
+        MONC = new javax.swing.JLabel();
+        TUESC = new javax.swing.JLabel();
+        WEDC = new javax.swing.JLabel();
+        THURC = new javax.swing.JLabel();
+        FRIC = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -251,6 +263,24 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
             }
         });
 
+        CIDC.setText("No more than 4 numbers");
+
+        CNAC.setText("No more than 40 CH");
+
+        FIDC.setText("No more than 6 numbers");
+
+        BIDC.setText("No more than 2 numbers");
+
+        MONC.setText("Y/N only");
+
+        TUESC.setText("Y/N only");
+
+        WEDC.setText("Y/N only");
+
+        THURC.setText("Y/N only");
+
+        FRIC.setText("Y/N only");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,57 +288,84 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(479, 479, 479))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(Insert)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(MON, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(THUR, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(59, 59, 59)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel7)
+                                                .addComponent(jLabel10)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(46, 46, 46)
+                                            .addComponent(Update)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(MONC)
+                                            .addComponent(THURC))
+                                        .addGap(107, 107, 107)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(FRI, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TUES, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TUESC)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(Reset))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(FRIC)
+                                        .addGap(1, 1, 1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(74, 74, 74)
+                                        .addComponent(jLabel8))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Delete)
+                                        .addGap(13, 13, 13)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(FRI, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(31, 31, 31)
+                                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(WEDC)
+                                            .addComponent(WED, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(8, 8, 8))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CIDC)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(TUES, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(MON, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(CNA, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(Insert)
-                                                .addGap(52, 52, 52)
-                                                .addComponent(Update)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(Reset)
-                                                .addGap(56, 56, 56)
-                                                .addComponent(Delete)
-                                                .addGap(43, 43, 43)
-                                                .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(CID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(WED, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(THUR, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)))
+                                        .addComponent(CNA, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(CID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CNAC)
+                                    .addComponent(FIDC)
+                                    .addComponent(BIDC)))))
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -316,55 +373,66 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addComponent(jLabel1)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CIDC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(CNA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(5, 5, 5)
+                        .addComponent(CNAC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(7, 7, 7)
+                            .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(3, 3, 3)
+                        .addComponent(FIDC)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BIDC)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(MON, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MON, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(TUES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TUES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(WED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MONC)
+                            .addComponent(TUESC)
+                            .addComponent(WEDC))
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(THUR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(THUR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
                             .addComponent(FRI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Insert)
+                            .addComponent(THURC)
+                            .addComponent(FRIC))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Update)
                             .addComponent(Reset)
                             .addComponent(Delete)
-                            .addComponent(Back)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Back)
+                            .addComponent(Insert))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,27 +445,132 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
             Connection myConn = getConnection();
             String sql = "insert into Timetable values (?,?,?,?,?,?,?,?)";
             String sql2 = "insert into Courses values(?,?)";
-            try {
 
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, CID.getText().trim());
-                pst.setString(2, FID.getText().trim());
-                pst.setString(3, MON.getText().trim());
-                pst.setString(4, TUES.getText().trim());
-                pst.setString(5, WED.getText().trim());
-                pst.setString(6, THUR.getText().trim());
-                pst.setString(7, FRI.getText().trim());
-                pst.setString(8, BID.getText().trim());
-                pst2.setString(1, CID.getText().trim());
-                pst2.setString(2, CNA.getText().trim());
-                pst2.executeUpdate();
-                pst.executeUpdate();
-                refreshTableData("Updated");
-            } catch (Exception exc) {
-                JOptionPane.showMessageDialog(null, exc);
+            Pattern pBID = Pattern.compile("\\d{1,2}");
+            Matcher mBID = pBID.matcher(BID.getText());
+            boolean isBIDValid = mBID.matches();
+
+            Pattern pCID = Pattern.compile("\\d{1,4}");
+            Matcher mCID = pCID.matcher(CID.getText());
+            boolean isCIDValid = mCID.matches();
+
+            Pattern pFID = Pattern.compile("\\d{1,6}");
+            Matcher mFID = pFID.matcher(FID.getText());
+            boolean isFIDValid = mFID.matches();
+
+            Pattern pCNA = Pattern.compile(".{1,40}");
+            Matcher mCNA = pCNA.matcher(CNA.getText());
+            boolean isCNAValid = mCNA.matches();
+
+            Pattern pMON = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mMON = pMON.matcher(MON.getText());
+            boolean isMONValid = mMON.matches();
+
+            Pattern pTUES = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mTUES = pTUES.matcher(TUES.getText());
+            boolean isTUESValid = mTUES.matches();
+
+            Pattern pWED = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mWED = pWED.matcher(WED.getText());
+            boolean isWEDValid = mWED.matches();
+
+            Pattern pTHUR = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mTHUR = pTHUR.matcher(THUR.getText());
+            boolean isTHURValid = mTHUR.matches();
+
+            Pattern pFRI = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mFRI = pFRI.matcher(FRI.getText());
+            boolean isFRIValid = mFRI.matches();
+
+            if (isBIDValid) {
+                BIDC.setText("Valid");
+                BIDC.setForeground(Color.BLUE);
+            } else {
+                BIDC.setText("InValid (1 - 2 DECIMAL Only)");
+                BIDC.setForeground(Color.red);
+            }
+            if (isCIDValid) {
+                CIDC.setText("Valid");
+                CIDC.setForeground(Color.BLUE);
+            } else {
+                CIDC.setText("InValid (1 - 4 DECIMAL Only)");
+                CIDC.setForeground(Color.red);
+            }
+            if (isFIDValid) {
+                FIDC.setText("Valid");
+                FIDC.setForeground(Color.BLUE);
+            } else {
+                FIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                FIDC.setForeground(Color.red);
+            }
+            if (isCNAValid) {
+                CNAC.setText("Valid");
+                CNAC.setForeground(Color.BLUE);
+            } else {
+                CNAC.setText("1 - 40 Charactors Only)");
+                CNAC.setForeground(Color.red);
             }
 
+            if (isMONValid) {
+                MONC.setText("Valid");
+                MONC.setForeground(Color.BLUE);
+            } else {
+                MONC.setText("InValid (Y/N only)");
+                MONC.setForeground(Color.red);
+            }
+            if (isTUESValid) {
+                TUESC.setText("Valid");
+                TUESC.setForeground(Color.BLUE);
+            } else {
+                TUESC.setText("InValid (Y/N only)");
+                TUESC.setForeground(Color.red);
+            }
+            if (isWEDValid) {
+                WEDC.setText("Valid");
+                WEDC.setForeground(Color.BLUE);
+            } else {
+                WEDC.setText("InValid (Y/N only)");
+                WEDC.setForeground(Color.red);
+            }
+            if (isTHURValid) {
+                THURC.setText("Valid");
+                THURC.setForeground(Color.BLUE);
+            } else {
+                THURC.setText("InValid (Y/N only)");
+                THURC.setForeground(Color.red);
+            }
+            if (isFRIValid) {
+                FRIC.setText("Valid");
+                FRIC.setForeground(Color.BLUE);
+            } else {
+                FRIC.setText("InValid (Y/N only)");
+                FRIC.setForeground(Color.red);
+            }
+
+            if (isBIDValid && isFRIValid && isTHURValid && isWEDValid && isTUESValid && isMONValid && isCNAValid && isFIDValid && isCIDValid) {
+
+                try {
+
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    PreparedStatement pst2 = myConn.prepareStatement(sql2);
+                    pst.setString(1, CID.getText().trim());
+                    pst.setString(2, FID.getText().trim());
+                    pst.setString(3, MON.getText().trim());
+                    pst.setString(4, TUES.getText().trim());
+                    pst.setString(5, WED.getText().trim());
+                    pst.setString(6, THUR.getText().trim());
+                    pst.setString(7, FRI.getText().trim());
+                    pst.setString(8, BID.getText().trim());
+                    pst2.setString(1, CID.getText().trim());
+                    pst2.setString(2, CNA.getText().trim());
+                    pst2.executeUpdate();
+                    pst.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(null, exc);
+                }
+
+            }
         }
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -408,29 +581,132 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
             Connection myConn = getConnection();
             String sql = "Update Timetable set CoursesID= ? ,FacultyID = ? , Mon = ? , Tues = ? ,Wed = ? , Thur = ? , Fri = ? , BranchesID = ? where CoursesID= ?";
             String sql2 = "Update Courses set CoursesID= ? , CoursesName = ?  where CoursesID= ?";
-            try {
+            Pattern pBID = Pattern.compile("\\d{1,2}");
+            Matcher mBID = pBID.matcher(BID.getText());
+            boolean isBIDValid = mBID.matches();
 
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, CID.getText().trim());
-                pst.setString(2, FID.getText().trim());
-                pst.setString(3, MON.getText().trim());
-                pst.setString(4, TUES.getText().trim());
-                pst.setString(5, WED.getText().trim());
-                pst.setString(6, THUR.getText().trim());
-                pst.setString(7, FRI.getText().trim());
-                pst.setString(8, BID.getText().trim());
-                pst.setString(9, CID.getText().trim());
-                pst2.setString(1, CID.getText().trim());
-                pst2.setString(2, CNA.getText().trim());
-                pst2.setString(3, CID.getText().trim());
-                pst2.executeUpdate();
-                pst.executeUpdate();
-                refreshTableData("Updated");
-            } catch (Exception exc) {
-                JOptionPane.showMessageDialog(null, exc);
+            Pattern pCID = Pattern.compile("\\d{1,4}");
+            Matcher mCID = pCID.matcher(CID.getText());
+            boolean isCIDValid = mCID.matches();
+
+            Pattern pFID = Pattern.compile("\\d{1,6}");
+            Matcher mFID = pFID.matcher(FID.getText());
+            boolean isFIDValid = mFID.matches();
+
+            Pattern pCNA = Pattern.compile(".{1,40}");
+            Matcher mCNA = pCNA.matcher(CNA.getText());
+            boolean isCNAValid = mCNA.matches();
+
+            Pattern pMON = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mMON = pMON.matcher(MON.getText());
+            boolean isMONValid = mMON.matches();
+
+            Pattern pTUES = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mTUES = pTUES.matcher(TUES.getText());
+            boolean isTUESValid = mTUES.matches();
+
+            Pattern pWED = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mWED = pWED.matcher(WED.getText());
+            boolean isWEDValid = mWED.matches();
+
+            Pattern pTHUR = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mTHUR = pTHUR.matcher(THUR.getText());
+            boolean isTHURValid = mTHUR.matches();
+
+            Pattern pFRI = Pattern.compile("[Y|N|y|n]{1}");
+            Matcher mFRI = pFRI.matcher(FRI.getText());
+            boolean isFRIValid = mFRI.matches();
+
+            if (isBIDValid) {
+                BIDC.setText("Valid");
+                BIDC.setForeground(Color.BLUE);
+            } else {
+                BIDC.setText("InValid (1 - 2 DECIMAL Only)");
+                BIDC.setForeground(Color.red);
+            }
+            if (isCIDValid) {
+                CIDC.setText("Valid");
+                CIDC.setForeground(Color.BLUE);
+            } else {
+                CIDC.setText("InValid (1 - 4 DECIMAL Only)");
+                CIDC.setForeground(Color.red);
+            }
+            if (isFIDValid) {
+                FIDC.setText("Valid");
+                FIDC.setForeground(Color.BLUE);
+            } else {
+                FIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                FIDC.setForeground(Color.red);
+            }
+            if (isCNAValid) {
+                CNAC.setText("Valid");
+                CNAC.setForeground(Color.BLUE);
+            } else {
+                CNAC.setText("1 - 40 Charactors Only)");
+                CNAC.setForeground(Color.red);
             }
 
+            if (isMONValid) {
+                MONC.setText("Valid");
+                MONC.setForeground(Color.BLUE);
+            } else {
+                MONC.setText("InValid (Y/N only)");
+                MONC.setForeground(Color.red);
+            }
+            if (isTUESValid) {
+                TUESC.setText("Valid");
+                TUESC.setForeground(Color.BLUE);
+            } else {
+                TUESC.setText("InValid (Y/N only)");
+                TUESC.setForeground(Color.red);
+            }
+            if (isWEDValid) {
+                WEDC.setText("Valid");
+                WEDC.setForeground(Color.BLUE);
+            } else {
+                WEDC.setText("InValid (Y/N only)");
+                WEDC.setForeground(Color.red);
+            }
+            if (isTHURValid) {
+                THURC.setText("Valid");
+                THURC.setForeground(Color.BLUE);
+            } else {
+                THURC.setText("InValid (Y/N only)");
+                THURC.setForeground(Color.red);
+            }
+            if (isFRIValid) {
+                FRIC.setText("Valid");
+                FRIC.setForeground(Color.BLUE);
+            } else {
+                FRIC.setText("InValid (Y/N only)");
+                FRIC.setForeground(Color.red);
+            }
+
+            if (isBIDValid && isFRIValid && isTHURValid && isWEDValid && isTUESValid && isMONValid && isCNAValid && isFIDValid && isCIDValid) {
+
+                try {
+
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    PreparedStatement pst2 = myConn.prepareStatement(sql2);
+                    pst.setString(1, CID.getText().trim());
+                    pst.setString(2, FID.getText().trim());
+                    pst.setString(3, MON.getText().trim());
+                    pst.setString(4, TUES.getText().trim());
+                    pst.setString(5, WED.getText().trim());
+                    pst.setString(6, THUR.getText().trim());
+                    pst.setString(7, FRI.getText().trim());
+                    pst.setString(8, BID.getText().trim());
+                    pst.setString(9, CID.getText().trim());
+                    pst2.setString(1, CID.getText().trim());
+                    pst2.setString(2, CNA.getText().trim());
+                    pst2.setString(3, CID.getText().trim());
+                    pst2.executeUpdate();
+                    pst.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(null, exc);
+                }
+            }
         }
     }//GEN-LAST:event_UpdateActionPerformed
 
@@ -578,19 +854,28 @@ public class AddAndEditCourseAndTimetable extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BID;
+    private javax.swing.JLabel BIDC;
     private javax.swing.JButton Back;
     private javax.swing.JTextField CID;
+    private javax.swing.JLabel CIDC;
     private javax.swing.JTextField CNA;
+    private javax.swing.JLabel CNAC;
     private javax.swing.JButton Delete;
     private javax.swing.JTextField FID;
+    private javax.swing.JLabel FIDC;
     private javax.swing.JTextField FRI;
+    private javax.swing.JLabel FRIC;
     private javax.swing.JButton Insert;
     private javax.swing.JTextField MON;
+    private javax.swing.JLabel MONC;
     private javax.swing.JButton Reset;
     private javax.swing.JTextField THUR;
+    private javax.swing.JLabel THURC;
     private javax.swing.JTextField TUES;
+    private javax.swing.JLabel TUESC;
     private javax.swing.JButton Update;
     private javax.swing.JTextField WED;
+    private javax.swing.JLabel WEDC;
     private javax.swing.JTable coursesTimeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -5,21 +5,24 @@
  */
 package vgc.zuoyunjin16825;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInterface{
+public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInterface {
 
     /**
      * Creates new form AddNewBranche
@@ -60,19 +63,16 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
         }
         return brancheList;
     }
-    
-    
-    public void refreshTableData(String message)
-   {    
-               // refresh jtable data
-               DefaultTableModel model = (DefaultTableModel)brancheTable.getModel();
-               model.setRowCount(0);
-               showbrancheData();
-               
-               JOptionPane.showMessageDialog(null, "Data "+message+" Succefully");  
-   }
-    
-    
+
+    public void refreshTableData(String message) {
+        // refresh jtable data
+        DefaultTableModel model = (DefaultTableModel) brancheTable.getModel();
+        model.setRowCount(0);
+        showbrancheData();
+
+        JOptionPane.showMessageDialog(null, "Data " + message + " Succefully");
+    }
+
     public void showbrancheData() {
         ArrayList<brancheData> list = brancheList();
         DefaultTableModel model = (DefaultTableModel) brancheTable.getModel();
@@ -108,6 +108,9 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
         Back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         brancheTable = new javax.swing.JTable();
+        BIDC = new javax.swing.JLabel();
+        BADC = new javax.swing.JLabel();
+        BNOC = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -170,68 +173,76 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BADD, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(BID, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(BIDC, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BADC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BNOC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BNO, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BADD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BNO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(Insert))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(Update)
-                                        .addGap(62, 62, 62)
-                                        .addComponent(Delete)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel1)))
-                .addGap(66, 66, 66)
+                                .addComponent(Insert)
+                                .addGap(68, 68, 68)
+                                .addComponent(Update)
+                                .addGap(66, 66, 66)
+                                .addComponent(Delete)
+                                .addGap(55, 55, 55)
+                                .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel1))
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BIDC, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(BADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
+                            .addComponent(BADD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BADC, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(BNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Insert)
-                            .addComponent(Back)
-                            .addComponent(Update)
-                            .addComponent(Delete))))
-                .addGap(0, 267, Short.MAX_VALUE))
+                            .addComponent(BNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BNOC, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Insert)
+                    .addComponent(Update)
+                    .addComponent(Delete)
+                    .addComponent(Back))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,21 +254,21 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
     }//GEN-LAST:event_BackActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-     Connection myConn = getConnection();
-            String sql = "Delete From Timetable WHERE BranchesID = ?";
-            String sql2 = "Delete From Branches WHERE BranchesID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, BID.getText().trim());
-                pst2.setString(1, BID.getText().trim());
-                pst.executeUpdate();
-                pst2.executeUpdate();
-                 refreshTableData("Deleted!");
-            } catch (Exception exc) {
-                exc.printStackTrace();
-            }
-   
+        Connection myConn = getConnection();
+        String sql = "Delete From Timetable WHERE BranchesID = ?";
+        String sql2 = "Delete From Branches WHERE BranchesID = ?";
+        try {
+            PreparedStatement pst = myConn.prepareStatement(sql);
+            PreparedStatement pst2 = myConn.prepareStatement(sql2);
+            pst.setString(1, BID.getText().trim());
+            pst2.setString(1, BID.getText().trim());
+            pst.executeUpdate();
+            pst2.executeUpdate();
+            refreshTableData("Deleted!");
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertActionPerformed
@@ -266,17 +277,53 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
         } else {
             Connection myConn = getConnection();
             String sql = "insert into Branches(BranchesID, BranchesADD, TEL) values (?,?,?)";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                pst.setString(1, BID.getText().trim());
-                pst.setString(2, BADD.getText().trim());
-                pst.setString(3, BNO.getText().trim());
-                pst.executeUpdate();
-                refreshTableData("Inserted");
-            } catch (Exception exc) {
-                exc.printStackTrace();
+
+            Pattern pBID = Pattern.compile("\\d{1,2}");
+            Matcher mBID = pBID.matcher(BID.getText());
+            boolean isBIDValid = mBID.matches();
+
+            Pattern pBADD = Pattern.compile(".{1,40}");
+            Matcher mBADD = pBADD.matcher(BADD.getText());
+            boolean isBADDValid = mBADD.matches();
+
+            Pattern pBNO = Pattern.compile("\\d{1,10}");
+            Matcher mBNO = pBNO.matcher(BNO.getText());
+            boolean isBNOValid = mBNO.matches();
+
+            if (isBIDValid) {
+                BIDC.setText("Valid");
+                BIDC.setForeground(Color.BLUE);
+            } else {
+                BIDC.setText("InValid (1 - 2 DECIMAL Only)");
+                BIDC.setForeground(Color.red);
+            }
+            if (isBADDValid) {
+                BADC.setText("Valid");
+                BADC.setForeground(Color.BLUE);
+            } else {
+                BADC.setText("InValid (1 - 40 Charactors Only)");
+                BADC.setForeground(Color.red);
             }
 
+            if (isBNOValid) {
+                BNOC.setText("Valid");
+                BNOC.setForeground(Color.BLUE);
+            } else {
+                BNOC.setText("InValid (1 - 10 DECIMAL Only)");
+                BNOC.setForeground(Color.red);
+            }
+            if (isBIDValid && isBADDValid && isBNOValid) {
+                try {
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    pst.setString(1, BID.getText().trim());
+                    pst.setString(2, BADD.getText().trim());
+                    pst.setString(3, BNO.getText().trim());
+                    pst.executeUpdate();
+                    refreshTableData("Inserted");
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -301,16 +348,54 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
         } else {
             Connection myConn = getConnection();
             String sql = "update Branches set BranchesID = ?, BranchesADD = ?, TEL = ? WHERE BranchesID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                pst.setString(1, BID.getText().trim());
-                pst.setString(2, BADD.getText().trim());
-                pst.setString(3, BNO.getText().trim());
-                pst.setString(4, BID.getText().trim());
-                pst.executeUpdate();
-                 refreshTableData("Updated");
-            } catch (Exception exc) {
-                exc.printStackTrace();
+
+            Pattern pBID = Pattern.compile("\\d{1,2}");
+            Matcher mBID = pBID.matcher(BID.getText());
+            boolean isBIDValid = mBID.matches();
+
+            Pattern pBADD = Pattern.compile(".{1,40}");
+            Matcher mBADD = pBADD.matcher(BADD.getText());
+            boolean isBADDValid = mBADD.matches();
+
+            Pattern pBNO = Pattern.compile("\\d{1,10}");
+            Matcher mBNO = pBNO.matcher(BNO.getText());
+            boolean isBNOValid = mBNO.matches();
+
+            if (isBIDValid) {
+                BIDC.setText("Valid");
+                BIDC.setForeground(Color.BLUE);
+            } else {
+                BIDC.setText("InValid (1 - 2 DECIMAL Only)");
+                BIDC.setForeground(Color.red);
+            }
+            if (isBADDValid) {
+                BADC.setText("Valid");
+                BADC.setForeground(Color.BLUE);
+            } else {
+                BADC.setText("InValid (1 - 40 Charactors Only)");
+                BADC.setForeground(Color.red);
+            }
+
+            if (isBNOValid) {
+                BNOC.setText("Valid");
+                BNOC.setForeground(Color.BLUE);
+            } else {
+                BNOC.setText("InValid (1 - 10 DECIMAL Only)");
+                BNOC.setForeground(Color.red);
+            }
+
+            if (isBIDValid && isBADDValid && isBNOValid) {
+                try {
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    pst.setString(1, BID.getText().trim());
+                    pst.setString(2, BADD.getText().trim());
+                    pst.setString(3, BNO.getText().trim());
+                    pst.setString(4, BID.getText().trim());
+                    pst.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
             }
     }//GEN-LAST:event_UpdateActionPerformed
     }
@@ -352,9 +437,12 @@ public class AddAndEditBranche extends javax.swing.JFrame implements ProgramInte
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BADC;
     private javax.swing.JTextField BADD;
     private javax.swing.JTextField BID;
+    private javax.swing.JLabel BIDC;
     private javax.swing.JTextField BNO;
+    private javax.swing.JLabel BNOC;
     private javax.swing.JButton Back;
     private javax.swing.JButton Delete;
     private javax.swing.JButton Insert;

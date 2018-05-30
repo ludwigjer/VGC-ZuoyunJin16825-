@@ -7,7 +7,7 @@ package vgc.zuoyunjin16825;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 class brancheData {
      private int BID,BNO;
@@ -19,6 +19,7 @@ class brancheData {
       this.BADD=BADD;
       this.BNO=BNO;
     }
+    
     public int getBID(){
         return BID;
     }

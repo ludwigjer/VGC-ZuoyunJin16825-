@@ -7,7 +7,7 @@ package vgc.zuoyunjin16825;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 class studentData {
 
@@ -36,6 +36,19 @@ class studentData {
 
     }
 
+    public studentData(int SID, String SAT) {
+        this.SID = SID;
+        this.SAT = SAT;
+
+    }
+    
+    
+    
+    public studentData(String SFN, String SLN) {
+        this.SFN = SFN;
+        this.SLN = SLN;
+    }
+
     public int getSID() {
         return SID;
     }
@@ -47,7 +60,7 @@ class studentData {
     public String getSAT() {
         return SAT;
     }
-    
+
     public int getSPHONE() {
         return SPHONE;
     }

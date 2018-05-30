@@ -5,6 +5,7 @@
  */
 package vgc.zuoyunjin16825;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,15 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class AddAndEditStudent extends javax.swing.JFrame {
+public class AddAndEditStudent extends javax.swing.JFrame implements ProgramInterface{
 
     public AddAndEditStudent() {
         initComponents();
@@ -119,6 +122,14 @@ public class AddAndEditStudent extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         FOWED = new javax.swing.JTextField();
         SAT = new javax.swing.JTextField();
+        FOWEDC = new javax.swing.JLabel();
+        SEDC = new javax.swing.JLabel();
+        SPHONEC = new javax.swing.JLabel();
+        SATC = new javax.swing.JLabel();
+        SADDC = new javax.swing.JLabel();
+        SLNC = new javax.swing.JLabel();
+        SIDC = new javax.swing.JLabel();
+        SFNC = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add New Students");
@@ -234,106 +245,156 @@ public class AddAndEditStudent extends javax.swing.JFrame {
             }
         });
 
+        FOWEDC.setText("xxx.xx");
+
+        SEDC.setText("YYYY-MM-DD");
+
+        SPHONEC.setText("No more than 10 Numbers");
+
+        SATC.setText("0%-100%");
+
+        SADDC.setText("No more than 30 CH");
+
+        SLNC.setText("No more than 20 CH");
+
+        SIDC.setText("No more than 6 Numbers");
+
+        SFNC.setText("No more than 20 CH");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Insert)
                                 .addGap(43, 43, 43)
                                 .addComponent(Update)
                                 .addGap(50, 50, 50)
                                 .addComponent(Reset)
-                                .addGap(42, 42, 42)
+                                .addGap(50, 50, 50)
                                 .addComponent(Delete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(48, 48, 48)
                                 .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel2)
                                         .addComponent(jLabel3)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(SPHONE, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                        .addComponent(SADD)
-                                        .addComponent(SLN)
-                                        .addComponent(SFN)
-                                        .addComponent(SED, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(SID))
-                                    .addComponent(FOWED, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SAT, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(65, 65, 65)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(SIDC)
+                                                .addComponent(SID, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(FOWEDC)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(SPHONEC)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(SLNC)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                    .addComponent(SLN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addComponent(SADD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(SADDC)
+                                                                .addComponent(SPHONE, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(SED, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(SEDC)
+                                                        .addComponent(FOWED, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(SAT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(SATC)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SFNC)
+                                    .addComponent(SFN, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1)))
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(SFN, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)))
+                        .addComponent(SIDC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SLN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SFN, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SFNC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SLN, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SLNC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(SADD, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SPHONE, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(SED))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(FOWED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SADDC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SPHONE, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SPHONEC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(SED, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SEDC)
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(FOWED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FOWEDC)
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(SAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addGap(4, 4, 4)
+                                .addComponent(SATC)
+                                .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Insert)
                             .addComponent(Update)
                             .addComponent(Reset)
                             .addComponent(Delete)
-                            .addComponent(Back)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                            .addComponent(Back))))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -357,27 +418,121 @@ public class AddAndEditStudent extends javax.swing.JFrame {
         } else {
             Connection myConn = getConnection();
             String sql = "insert into Student values (?,?,?,?,?,?)";
-            String sql2 ="insert into PaymentAndAttendance values(?,?,?)";
-            try {
+            String sql2 = "insert into PaymentAndAttendance values(?,?,?)";
 
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, SID.getText().trim());
-                pst.setString(2, SFN.getText().trim());
-                pst.setString(3, SLN.getText().trim());
-                pst.setString(4, SADD.getText().trim());
-                pst.setString(5, SPHONE.getText().trim());
-                pst.setString(6, SED.getText().trim());
-                pst2.setString(1, SID.getText().trim());
-                pst2.setString(2, FOWED.getText().trim());
-                pst2.setString(3, SAT.getText().trim());
-                pst.executeUpdate();
-                pst2.executeUpdate();
-                refreshTableData("Updated");
-            } catch (Exception exc) {
-                JOptionPane.showMessageDialog(null, exc);
+            Pattern pSID = Pattern.compile("\\d{1,6}");
+            Matcher mSID = pSID.matcher(SID.getText());
+            boolean isSIDValid = mSID.matches();
+
+            Pattern pSFN = Pattern.compile("\\w{1,20}");
+            Matcher mSFN = pSFN.matcher(SFN.getText());
+            boolean isSFNValid = mSFN.matches();
+
+            Pattern pSLN = Pattern.compile("\\w{1,20}");
+            Matcher mSLN = pSLN.matcher(SLN.getText());
+            boolean isSLNValid = mSLN.matches();
+
+            Pattern pSADD = Pattern.compile(".{1,30}");
+            Matcher mSADD = pSADD.matcher(SADD.getText());
+            boolean isSADDValid = mSADD.matches();
+
+            Pattern pSPHONE = Pattern.compile("\\d{1,10}");
+            Matcher mSPHONE = pSPHONE.matcher(SPHONE.getText());
+            boolean isSPHONEValid = mSPHONE.matches();
+
+            Pattern pSED = Pattern.compile("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+            Matcher mSED = pSED.matcher(SED.getText());
+            boolean isSEDValid = mSED.matches();
+
+            Pattern pFOWED = Pattern.compile("\\d{1,7}\\.?\\d{1,2}");
+            Matcher mFOWED = pFOWED.matcher(FOWED.getText());
+            boolean isFOWEDValid = mFOWED.matches();
+
+            Pattern pSAT = Pattern.compile("\\d{1,3}\\%");
+            Matcher mSAT = pSAT.matcher(SAT.getText());
+            boolean isSATValid = mSAT.matches();
+
+            if (isSIDValid) {
+                SIDC.setText("Valid");
+                SIDC.setForeground(Color.BLUE);
+            } else {
+                SIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                SIDC.setForeground(Color.red);
+            }
+            if (isSFNValid) {
+                SFNC.setText("Valid");
+                SFNC.setForeground(Color.BLUE);
+            } else {
+                SFNC.setText("InValid (1 - 20 Charactors Only)");
+                SFNC.setForeground(Color.red);
+            }
+            if (isSLNValid) {
+                SLNC.setText("Valid");
+                SLNC.setForeground(Color.BLUE);
+            } else {
+                SLNC.setText("InValid (1 - 20 Charactors Only)");
+                SLNC.setForeground(Color.red);
+            }
+            if (isSADDValid) {
+                SADDC.setText("Valid");
+                SADDC.setForeground(Color.BLUE);
+            } else {
+                SADDC.setText("InValid (1 - 30 Charactors Only)");
+                SADDC.setForeground(Color.red);
+            }
+            if (isSPHONEValid) {
+                SPHONEC.setText("Valid");
+                SPHONEC.setForeground(Color.BLUE);
+            } else {
+                SPHONEC.setText("InValid (1 - 10 DECIMAL Only)");
+                SPHONEC.setForeground(Color.red);
             }
 
+            if (isSEDValid) {
+                SEDC.setText("Valid");
+                SEDC.setForeground(Color.BLUE);
+            } else {
+                SEDC.setText("The Foramating MUST BE YYYY-MM-DD)");
+                SEDC.setForeground(Color.red);
+            }
+
+            if (isFOWEDValid) {
+                FOWEDC.setText("Valid");
+                FOWEDC.setForeground(Color.BLUE);
+            } else {
+                FOWEDC.setText("Maximum 7 integer and 2 decimal places");
+                FOWEDC.setForeground(Color.red);
+            }
+
+            if (isSATValid) {
+                SATC.setText("Valid");
+                SATC.setForeground(Color.BLUE);
+            } else {
+                SATC.setText("Number + % Only");
+                SATC.setForeground(Color.red);
+            }
+
+            if (isSPHONEValid && isSADDValid && isSLNValid && isSFNValid && isSIDValid && isSATValid && isFOWEDValid && isSEDValid) {
+                try {
+
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    PreparedStatement pst2 = myConn.prepareStatement(sql2);
+                    pst.setString(1, SID.getText().trim());
+                    pst.setString(2, SFN.getText().trim());
+                    pst.setString(3, SLN.getText().trim());
+                    pst.setString(4, SADD.getText().trim());
+                    pst.setString(5, SPHONE.getText().trim());
+                    pst.setString(6, SED.getText().trim());
+                    pst2.setString(1, SID.getText().trim());
+                    pst2.setString(2, FOWED.getText().trim());
+                    pst2.setString(3, SAT.getText().trim());
+                    pst.executeUpdate();
+                    pst2.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(null, exc);
+                }
+            }
         }
 
 
@@ -408,58 +563,154 @@ public class AddAndEditStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_SIDActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-    if (SID.getText().isEmpty()) {
+        if (SID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "StudentID CAN NOT BE NULL!!!");
         } else {
             Connection myConn = getConnection();
             String sql = "update Student set StudentID = ?, StudentFName = ?, StudentLName = ?, Address = ?, PhoneNumber = ?, EnrollmenttDate = ? WHERE StudentID = ?";
             String sql2 = "update PaymentAndAttendance set StudentID = ?, Feesowed = ?, Attendance = ? WHERE StudentID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, SID.getText().trim());
-                pst.setString(2, SFN.getText().trim());
-                pst.setString(3, SLN.getText().trim());
-                pst.setString(4, SADD.getText().trim());
-                pst.setString(5, SPHONE.getText().trim());
-                pst.setString(6, SED.getText().trim());
-                pst.setString(7, SID.getText().trim());
-                pst2.setString(1, SID.getText().trim());
-                pst2.setString(2, FOWED.getText().trim());
-                pst2.setString(3, SAT.getText().trim());
-                pst2.setString(4, SID.getText().trim());
-                pst.executeUpdate();
-                pst2.executeUpdate();
-                refreshTableData("Updated");
-            } catch (Exception exc) {
-                exc.printStackTrace();
+
+            Pattern pSID = Pattern.compile("\\d{1,6}");
+            Matcher mSID = pSID.matcher(SID.getText());
+            boolean isSIDValid = mSID.matches();
+
+            Pattern pSFN = Pattern.compile("\\w{1,20}");
+            Matcher mSFN = pSFN.matcher(SFN.getText());
+            boolean isSFNValid = mSFN.matches();
+
+            Pattern pSLN = Pattern.compile("\\w{1,20}");
+            Matcher mSLN = pSLN.matcher(SLN.getText());
+            boolean isSLNValid = mSLN.matches();
+
+            Pattern pSADD = Pattern.compile(".{1,30}");
+            Matcher mSADD = pSADD.matcher(SADD.getText());
+            boolean isSADDValid = mSADD.matches();
+
+            Pattern pSPHONE = Pattern.compile("\\d{1,10}");
+            Matcher mSPHONE = pSPHONE.matcher(SPHONE.getText());
+            boolean isSPHONEValid = mSPHONE.matches();
+
+            Pattern pSED = Pattern.compile("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+            Matcher mSED = pSED.matcher(SED.getText());
+            boolean isSEDValid = mSED.matches();
+
+            Pattern pFOWED = Pattern.compile("\\d{1,7}\\.?\\d{1,2}");
+            Matcher mFOWED = pFOWED.matcher(FOWED.getText());
+            boolean isFOWEDValid = mFOWED.matches();
+
+            Pattern pSAT = Pattern.compile("\\d{1,3}\\%");
+            Matcher mSAT = pSAT.matcher(SAT.getText());
+            boolean isSATValid = mSAT.matches();
+
+            if (isSIDValid) {
+                SIDC.setText("Valid");
+                SIDC.setForeground(Color.BLUE);
+            } else {
+                SIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                SIDC.setForeground(Color.red);
             }
-    }                            
+            if (isSFNValid) {
+                SFNC.setText("Valid");
+                SFNC.setForeground(Color.BLUE);
+            } else {
+                SFNC.setText("InValid (1 - 20 Charactors Only)");
+                SFNC.setForeground(Color.red);
+            }
+            if (isSLNValid) {
+                SLNC.setText("Valid");
+                SLNC.setForeground(Color.BLUE);
+            } else {
+                SLNC.setText("InValid (1 - 20 Charactors Only)");
+                SLNC.setForeground(Color.red);
+            }
+            if (isSADDValid) {
+                SADDC.setText("Valid");
+                SADDC.setForeground(Color.BLUE);
+            } else {
+                SADDC.setText("InValid (1 - 30 Charactors Only)");
+                SADDC.setForeground(Color.red);
+            }
+            if (isSPHONEValid) {
+                SPHONEC.setText("Valid");
+                SPHONEC.setForeground(Color.BLUE);
+            } else {
+                SPHONEC.setText("InValid (1 - 10 DECIMAL Only)");
+                SPHONEC.setForeground(Color.red);
+            }
+
+            if (isSEDValid) {
+                SEDC.setText("Valid");
+                SEDC.setForeground(Color.BLUE);
+            } else {
+                SEDC.setText("The Foramating MUST BE YYYY-MM-DD)");
+                SEDC.setForeground(Color.red);
+            }
+
+            if (isFOWEDValid) {
+                FOWEDC.setText("Valid");
+                FOWEDC.setForeground(Color.BLUE);
+            } else {
+                FOWEDC.setText("Maximum 7 integer and 2 decimal places");
+                FOWEDC.setForeground(Color.red);
+            }
+
+            if (isSATValid) {
+                SATC.setText("Valid");
+                SATC.setForeground(Color.BLUE);
+            } else {
+                SATC.setText("Number + % Only");
+                SATC.setForeground(Color.red);
+            }
+
+            if (isSPHONEValid && isSADDValid && isSLNValid && isSFNValid && isSIDValid && isSATValid && isFOWEDValid && isSEDValid) {
+
+                try {
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    PreparedStatement pst2 = myConn.prepareStatement(sql2);
+                    pst.setString(1, SID.getText().trim());
+                    pst.setString(2, SFN.getText().trim());
+                    pst.setString(3, SLN.getText().trim());
+                    pst.setString(4, SADD.getText().trim());
+                    pst.setString(5, SPHONE.getText().trim());
+                    pst.setString(6, SED.getText().trim());
+                    pst.setString(7, SID.getText().trim());
+                    pst2.setString(1, SID.getText().trim());
+                    pst2.setString(2, FOWED.getText().trim());
+                    pst2.setString(3, SAT.getText().trim());
+                    pst2.setString(4, SID.getText().trim());
+                    pst.executeUpdate();
+                    pst2.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
+        }
     }//GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-    Connection myConn = getConnection();
-            String sql = "Delete From PaymentAndAttendance WHERE StudentID = ?";
-            String sql2 = "Delete From Student WHERE StudentID = ?";
-            String sql3 = "Delete From ExamsGradeBook WHERE StudentID = ?";
-            String sql4 = "Delete From AssignmentsGradeBook WHERE StudentID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                PreparedStatement pst3 = myConn.prepareStatement(sql3);
-                PreparedStatement pst4 = myConn.prepareStatement(sql4);
-                pst.setString(1, SID.getText().trim());
-                pst2.setString(1, SID.getText().trim());
-                pst3.setString(1, SID.getText().trim());
-                pst4.setString(1, SID.getText().trim());
-                pst3.executeUpdate();
-                pst4.executeUpdate();
-                pst.executeUpdate();
-                pst2.executeUpdate();
-                refreshTableData("Deleted!");
-            } catch (Exception exc) {
-                exc.printStackTrace();
-            }
+        Connection myConn = getConnection();
+        String sql = "Delete From PaymentAndAttendance WHERE StudentID = ?";
+        String sql2 = "Delete From Student WHERE StudentID = ?";
+        String sql3 = "Delete From ExamsGradeBook WHERE StudentID = ?";
+        String sql4 = "Delete From AssignmentsGradeBook WHERE StudentID = ?";
+        try {
+            PreparedStatement pst = myConn.prepareStatement(sql);
+            PreparedStatement pst2 = myConn.prepareStatement(sql2);
+            PreparedStatement pst3 = myConn.prepareStatement(sql3);
+            PreparedStatement pst4 = myConn.prepareStatement(sql4);
+            pst.setString(1, SID.getText().trim());
+            pst2.setString(1, SID.getText().trim());
+            pst3.setString(1, SID.getText().trim());
+            pst4.setString(1, SID.getText().trim());
+            pst3.executeUpdate();
+            pst4.executeUpdate();
+            pst.executeUpdate();
+            pst2.executeUpdate();
+            refreshTableData("Deleted!");
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void FOWEDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FOWEDActionPerformed
@@ -539,15 +790,23 @@ public class AddAndEditStudent extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JButton Delete;
     private javax.swing.JTextField FOWED;
+    private javax.swing.JLabel FOWEDC;
     private javax.swing.JButton Insert;
     private javax.swing.JButton Reset;
     private javax.swing.JTextField SADD;
+    private javax.swing.JLabel SADDC;
     private javax.swing.JTextField SAT;
+    private javax.swing.JLabel SATC;
     private javax.swing.JTextField SED;
+    private javax.swing.JLabel SEDC;
     private javax.swing.JTextField SFN;
+    private javax.swing.JLabel SFNC;
     private javax.swing.JTextField SID;
+    private javax.swing.JLabel SIDC;
     private javax.swing.JTextField SLN;
+    private javax.swing.JLabel SLNC;
     private javax.swing.JTextField SPHONE;
+    private javax.swing.JLabel SPHONEC;
     private javax.swing.JButton Update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 public class Student extends javax.swing.JFrame implements ProgramInterface {
 

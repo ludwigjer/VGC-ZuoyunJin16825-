@@ -5,21 +5,24 @@
  */
 package vgc.zuoyunjin16825;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class AddAndEditTeacher extends javax.swing.JFrame {
+public class AddAndEditTeacher extends javax.swing.JFrame implements ProgramInterface{
 
     /**
      * Creates new form AddNewTeacher
@@ -41,18 +44,16 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
             return null;
         }
     }
-    
-     public void refreshTableData(String message)
-   {    
-               // refresh jtable data
-               DefaultTableModel model = (DefaultTableModel)teacherTable.getModel();
-               model.setRowCount(0);
-               showTeacherData();
-               
-               JOptionPane.showMessageDialog(null, "Data "+message+" Succefully");  
-   }
-    
-    
+
+    public void refreshTableData(String message) {
+        // refresh jtable data
+        DefaultTableModel model = (DefaultTableModel) teacherTable.getModel();
+        model.setRowCount(0);
+        showTeacherData();
+
+        JOptionPane.showMessageDialog(null, "Data " + message + " Succefully");
+    }
+
     public ArrayList<teacherData> teacherList() {
         ArrayList<teacherData> teacherList = new ArrayList();
         Connection myConn = getConnection();
@@ -111,6 +112,10 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
         Delete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         teacherTable = new javax.swing.JTable();
+        FIDC = new javax.swing.JLabel();
+        FFNC = new javax.swing.JLabel();
+        FLNC = new javax.swing.JLabel();
+        TPNC = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -189,43 +194,58 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(teacherTable);
 
+        FIDC.setText("0 - 6 Numbers only");
+
+        FFNC.setText("No more than 20 CH");
+
+        FLNC.setText("No more than 20 CH");
+
+        TPNC.setText("No more than 10 Numbers");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(46, 46, 46)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FFN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FLN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(TPN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Insert, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(Update)
-                                .addGap(36, 36, 36)
-                                .addComponent(Delete)
-                                .addGap(39, 39, 39)
-                                .addComponent(Reset)
-                                .addGap(37, 37, 37)
-                                .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(46, 46, 46)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(FFN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(FLN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(FIDC)
+                                        .addComponent(FFNC)
+                                        .addComponent(FLNC)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TPN, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(TPNC)))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(117, 117, 117)
+                            .addComponent(jLabel1)
+                            .addGap(19, 19, 19)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel1)
-                        .addGap(19, 19, 19)))
+                        .addGap(83, 83, 83)
+                        .addComponent(Insert, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(Update)
+                        .addGap(44, 44, 44)
+                        .addComponent(Delete)
+                        .addGap(32, 32, 32)
+                        .addComponent(Reset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -242,26 +262,33 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(7, 7, 7)
+                        .addComponent(FIDC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FFNC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FLN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(FLNC, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(TPNC)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FLN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Insert)
                             .addComponent(Update, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(Reset)
-                                .addComponent(Back)
-                                .addComponent(Delete)))))
+                            .addComponent(Delete)
+                            .addComponent(Reset)
+                            .addComponent(Back))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -282,18 +309,65 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
         } else {
             Connection myConn = getConnection();
             String sql = "insert into Faculty(FacultyID, FacultyFName, FacultyLName, PhoneNumber) values (?,?,?,?)";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                pst.setString(4, TPN.getText().trim());
-                pst.setString(1, FID.getText().trim());
-                pst.setString(2, FFN.getText().trim());
-                pst.setString(3, FLN.getText().trim());
-                pst.executeUpdate();
-                refreshTableData("Inserted");
-            } catch (Exception exc) {
-                exc.printStackTrace();
+
+            Pattern pFID = Pattern.compile("\\d{1,6}");
+            Matcher mFID = pFID.matcher(FID.getText());
+            boolean isFIDValid = mFID.matches();
+
+            Pattern pFFN = Pattern.compile("\\w{1,20}");
+            Matcher mFFN = pFFN.matcher(FFN.getText());
+            boolean isFFNValid = mFFN.matches();
+
+            Pattern pFLN = Pattern.compile("\\w{1,20}");
+            Matcher mFLN = pFLN.matcher(FLN.getText());
+            boolean isFLNValid = mFLN.matches();
+
+            Pattern pTPN = Pattern.compile("\\d{1,10}");
+            Matcher mTPN = pTPN.matcher(TPN.getText());
+            boolean isBNOValid = mTPN.matches();
+
+            if (isFIDValid) {
+                FIDC.setText("Valid");
+                FIDC.setForeground(Color.BLUE);
+            } else {
+                FIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                FIDC.setForeground(Color.red);
+            }
+            if (isFFNValid) {
+                FFNC.setText("Valid");
+                FFNC.setForeground(Color.BLUE);
+            } else {
+                FFNC.setText("InValid (1 - 20 Charactors Only)");
+                FFNC.setForeground(Color.red);
+            }
+            if (isFLNValid) {
+                FLNC.setText("Valid");
+                FLNC.setForeground(Color.BLUE);
+            } else {
+                FLNC.setText("InValid (1 - 20 Charactors Only)");
+                FLNC.setForeground(Color.red);
+            }
+            if (isBNOValid) {
+                TPNC.setText("Valid");
+                TPNC.setForeground(Color.BLUE);
+            } else {
+                TPNC.setText("InValid (1 - 10 DECIMAL Only)");
+                TPNC.setForeground(Color.red);
             }
 
+            if (isBNOValid && isFIDValid && isFFNValid && isFLNValid) {
+                try {
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    pst.setString(4, TPN.getText().trim());
+                    pst.setString(1, FID.getText().trim());
+                    pst.setString(2, FFN.getText().trim());
+                    pst.setString(3, FLN.getText().trim());
+                    pst.executeUpdate();
+                    refreshTableData("Inserted");
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_InsertActionPerformed
 
@@ -310,46 +384,94 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
     }//GEN-LAST:event_ResetActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
-      if (FID.getText().isEmpty()) {
+        if (FID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "TeacherID CAN NOT BE NULL!!");
         } else {
             Connection myConn = getConnection();
             String sql = "update Faculty set FacultyID = ?, FacultyFName = ?, FacultyLName = ? ,PhoneNumber = ? WHERE FacultyID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                pst.setString(1, FID.getText().trim());
-                pst.setString(2, FFN.getText().trim());
-                pst.setString(3, FLN.getText().trim());
-                pst.setString(4, TPN.getText().trim());
-                pst.setString(5, FID.getText().trim());
-                pst.executeUpdate();
-                refreshTableData("Updated");
-            } catch (Exception exc) {
-                exc.printStackTrace();
+
+            Pattern pFID = Pattern.compile("\\d{1,6}");
+            Matcher mFID = pFID.matcher(FID.getText());
+            boolean isFIDValid = mFID.matches();
+
+            Pattern pFFN = Pattern.compile("\\w{1,20}");
+            Matcher mFFN = pFFN.matcher(FFN.getText());
+            boolean isFFNValid = mFFN.matches();
+
+            Pattern pFLN = Pattern.compile("\\w{1,20}");
+            Matcher mFLN = pFLN.matcher(FLN.getText());
+            boolean isFLNValid = mFLN.matches();
+
+            Pattern pTPN = Pattern.compile("\\d{1,10}");
+            Matcher mTPN = pTPN.matcher(TPN.getText());
+            boolean isBNOValid = mTPN.matches();
+
+            if (isFIDValid) {
+                FIDC.setText("Valid");
+                FIDC.setForeground(Color.BLUE);
+            } else {
+                FIDC.setText("InValid (1 - 6 DECIMAL Only)");
+                FIDC.setForeground(Color.red);
             }
-    }              
-        
+            if (isFFNValid) {
+                FFNC.setText("Valid");
+                FFNC.setForeground(Color.BLUE);
+            } else {
+                FFNC.setText("InValid (1 - 20 Charactors Only)");
+                FFNC.setForeground(Color.red);
+            }
+            if (isFLNValid) {
+                FLNC.setText("Valid");
+                FLNC.setForeground(Color.BLUE);
+            } else {
+                FLNC.setText("InValid (1 - 20 Charactors Only)");
+                FLNC.setForeground(Color.red);
+            }
+            if (isBNOValid) {
+                TPNC.setText("Valid");
+                TPNC.setForeground(Color.BLUE);
+            } else {
+                TPNC.setText("InValid (1 - 10 DECIMAL Only)");
+                TPNC.setForeground(Color.red);
+            }
+
+            if (isBNOValid && isFIDValid && isFFNValid && isFLNValid) {
+                try {
+                    PreparedStatement pst = myConn.prepareStatement(sql);
+                    pst.setString(1, FID.getText().trim());
+                    pst.setString(2, FFN.getText().trim());
+                    pst.setString(3, FLN.getText().trim());
+                    pst.setString(4, TPN.getText().trim());
+                    pst.setString(5, FID.getText().trim());
+                    pst.executeUpdate();
+                    refreshTableData("Updated");
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            }
+        }
     }//GEN-LAST:event_UpdateActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-     Connection myConn = getConnection();
-            String sql = "Delete From Faculty WHERE FacultyID = ?";
-            String sql2 = "Delete From Timetable WHERE FacultyID = ?";
-            try {
-                PreparedStatement pst = myConn.prepareStatement(sql);
-                PreparedStatement pst2 = myConn.prepareStatement(sql2);
-                pst.setString(1, FID.getText().trim());
-                pst2.setString(1, FID.getText().trim());
-                pst2.executeUpdate();
-                pst.executeUpdate();
-                 refreshTableData("Deleted!");
-            } catch (Exception exc) {
-                exc.printStackTrace();
-            }
+        Connection myConn = getConnection();
+        String sql = "Delete From Faculty WHERE FacultyID = ?";
+        String sql2 = "Delete From Timetable WHERE FacultyID = ?";
+
+        try {
+            PreparedStatement pst = myConn.prepareStatement(sql);
+            PreparedStatement pst2 = myConn.prepareStatement(sql2);
+            pst.setString(1, FID.getText().trim());
+            pst2.setString(1, FID.getText().trim());
+            pst2.executeUpdate();
+            pst.executeUpdate();
+            refreshTableData("Deleted!");
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
     }//GEN-LAST:event_DeleteActionPerformed
 
     private void teacherTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacherTableMouseClicked
-            // Get The Index Of The Slected Row 
+        // Get The Index Of The Slected Row 
         int i = teacherTable.getSelectedRow();
 
         TableModel model = teacherTable.getModel();
@@ -360,7 +482,7 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
         FFN.setText(model.getValueAt(i, 1).toString());
 
         FLN.setText(model.getValueAt(i, 2).toString());
-        
+
         TPN.setText(model.getValueAt(i, 3).toString());
     }//GEN-LAST:event_teacherTableMouseClicked
 
@@ -404,11 +526,15 @@ public class AddAndEditTeacher extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JButton Delete;
     private javax.swing.JTextField FFN;
+    private javax.swing.JLabel FFNC;
     private javax.swing.JTextField FID;
+    private javax.swing.JLabel FIDC;
     private javax.swing.JTextField FLN;
+    private javax.swing.JLabel FLNC;
     private javax.swing.JButton Insert;
     private javax.swing.JButton Reset;
     private javax.swing.JTextField TPN;
+    private javax.swing.JLabel TPNC;
     private javax.swing.JButton Update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

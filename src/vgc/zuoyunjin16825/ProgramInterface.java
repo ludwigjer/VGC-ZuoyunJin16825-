@@ -7,7 +7,7 @@ package vgc.zuoyunjin16825;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 public interface ProgramInterface {
   public static void getConnection(){};  

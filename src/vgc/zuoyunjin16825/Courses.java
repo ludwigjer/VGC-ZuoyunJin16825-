@@ -14,9 +14,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
-public class Courses extends javax.swing.JFrame {
+public class Courses extends javax.swing.JFrame implements ProgramInterface{
 
     /**
      * Creates new form NewJFrame

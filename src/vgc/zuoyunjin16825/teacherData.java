@@ -7,7 +7,7 @@ package vgc.zuoyunjin16825;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 class teacherData {
     private int FID,FPHONE;
@@ -25,6 +25,17 @@ class teacherData {
     {
       this.FID=FID;
       this.FPHONE=FPHONE;
+      this.FFN=FFN;
+      this.FLN=FLN;
+    }
+    public teacherData(int FID,String FFN,String FLN)
+    {
+      this.FID=FID;
+      this.FFN=FFN;
+      this.FLN=FLN;
+    }
+    public teacherData(String FFN,String FLN,String CSN)
+    {
       this.FFN=FFN;
       this.FLN=FLN;
       this.CSN=CSN;

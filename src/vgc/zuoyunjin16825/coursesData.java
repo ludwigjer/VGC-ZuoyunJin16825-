@@ -7,7 +7,7 @@ package vgc.zuoyunjin16825;
 
 /**
  *
- * @author ludwig
+ * @ZuoyunJin16825
  */
 class coursesData {
     private int BID,FID,CID;

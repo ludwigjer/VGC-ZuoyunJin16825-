@@ -5,24 +5,51 @@
  */
 package vgc.zuoyunjin16825;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @ZuoyunJin 16825
  */
-public class loginWindow extends javax.swing.JFrame {
+public class loginWindow extends javax.swing.JFrame implements Serializable {
 
     /**
      * Creates new form window
      */
     public loginWindow() {
+
         initComponents();
+
+    }
+
+    public Connection getConnection() {
+        try {
+            String dbUrl = "jdbc:mysql://localhost:3306/vgc?useSSL=false";
+            String userid = "root";
+            String userps = "P6agztsg";
+            Connection myConn = DriverManager.getConnection(dbUrl, userid, userps);
+            return myConn;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -164,18 +191,15 @@ public class loginWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_userPasswordActionPerformed
 
     private void SigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SigninActionPerformed
+        Connection myConn = getConnection();
+        String sql = "Select * from Login where ID=? and password=?";
         try {
-            String dbUrl = "jdbc:mysql://localhost:3306/vgc?useSSL=false";
-            String userid = "root";
-            String userps = "P6agztsg";
-            Connection myConn = DriverManager.getConnection(dbUrl, userid, userps);
-            String sql = "Select * from Login where ID=? and password=?";//and Priority="+"priority";
             PreparedStatement pst = myConn.prepareStatement(sql);
             pst.setString(1, userID.getText());
             pst.setString(2, userPassword.getText());
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                System.out.println(userID.getText().trim() + userPassword.getText().trim());
+
                 String sq2 = "Select Priority from Login where ID=" + userID.getText().trim() + " and password=" + userPassword.getText().trim();
                 Statement myStmt = myConn.createStatement();
                 ResultSet myRs = myStmt.executeQuery(sq2);
@@ -184,15 +208,37 @@ public class loginWindow extends javax.swing.JFrame {
                 switch (Priority) {
                     case 0:
                         JOptionPane.showMessageDialog(null, "Welcom Admin");
-                        Menu field = new Menu();
-                        field.setVisible(true);
+                        Menu field1 = new Menu();
+                        field1.setVisible(true);
                         setVisible(false);
                         break;
                     case 1:
-                        
+                        try {
+                            FileWriter file = new FileWriter("UserID.txt");
+                            BufferedWriter buffer = new BufferedWriter(file);
+                            buffer.write(userID.getText().trim());
+                            buffer.close();
+                        } catch (IOException e) {
+                            System.out.println("A write error has occured");
+                        }
+                        JOptionPane.showMessageDialog(null, "Welcom Teacher");
+                        MenuT field2 = new MenuT();
+                        field2.setVisible(true);
+                        setVisible(false);
                         break;
-                    case 2:   
-                        
+                    case 2:
+                        try {
+                            FileWriter file = new FileWriter("UserID.txt");
+                            BufferedWriter buffer = new BufferedWriter(file);
+                            buffer.write(userID.getText().trim());
+                            buffer.close();
+                        } catch (IOException e) {
+                            System.out.println("A write error has occured");
+                        }
+                        JOptionPane.showMessageDialog(null, "Welcom Student");
+                        MenuS field3 = new MenuS();
+                        field3.setVisible(true);
+                        setVisible(false);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Unauthorized access!!");
